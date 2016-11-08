@@ -1,0 +1,26 @@
+{
+  "name": "empewoow/flarum-ext-auth-redirect",
+  "description": "Redirect authentication methods; login, logout, and register links.",
+  "type": "flarum-extension",
+  "keywords": ["authentication", "user", "links", "redirect"],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Matthijs Jansen",
+      "email": "empewoow@gmail.com"
+    }
+  ],
+  "require": {
+    "flarum/core": "^0.1.0-beta.5"
+  },
+  "extra": {
+    "flarum-extension": {
+      "title": "Auth Redirect",
+      "icon": {
+        "name": "check",
+        "backgroundColor": "#006db6",
+        "color": "#fff"
+      }
+    }
+  }
+}
