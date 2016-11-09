@@ -1,7 +1,6 @@
 import { extend } from 'flarum/extend';
 import HeaderSecondary from 'flarum/components/HeaderSecondary';
 import SessionDropdown from 'flarum/components/SessionDropdown';
-//import LogInButtons from 'flarum/components/LoginButtons';
 import LinkButton from 'flarum/components/LinkButton';
 import SettingsPage from 'flarum/components/SettingsPage';
 //import LogInModal from 'flarum/components/LogInModal';
@@ -25,7 +24,7 @@ app.initializers.add('empewoow-flarum-auth-redirect', function() {
     }
   });
 
-  // Change log-out button url
+  // Change log-out button URL
   extend(SessionDropdown.prototype, 'items', function(items){
     // Remove existing button first
     items.remove('logOut');
@@ -34,7 +33,7 @@ app.initializers.add('empewoow-flarum-auth-redirect', function() {
       LinkButton.component({
           icon: 'sign-out',
           children: app.translator.trans('core.forum.header.log_out_button'),
-          href: app.forum.attribute('baseUrl') + '/login',
+          href:  'http://localhost/login',
           config: () => {}
         }),
       -100
