@@ -6,15 +6,14 @@ export default class AuthSettingsModal extends SettingsModal {
   }
 
   title() {
-    return "Authentication settings";
-    //return app.translator.trans('santiagobiali-logo.admin.logo_settings.title');
+    return app.translator.trans('empewoow-flarum-auth-redirect.admin.auth_settings.title');
   }
 
   form() {
     return [
       <div className="Form-group">
-        <label>Redirect URL</label>
-        ex: http://localhost/login
+        <label>{app.translator.trans('empewoow-flarum-auth-redirect.admin.auth_settings.redirect_url')}</label>
+        {app.translator.trans('empewoow-flarum-auth-redirect.admin.auth_settings.url_instructions')}
         <input className="FormControl" bidi={this.setting('empewoow-flarum-auth-redirect.auth_redirect_url')}/>
       </div>
     ];

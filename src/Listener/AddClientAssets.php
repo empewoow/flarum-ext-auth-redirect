@@ -13,7 +13,7 @@ class AddClientAssets {
    */
   public function subscribe(Dispatcher $events) {
     $events->listen(ConfigureClientView::class, [$this, 'addAssets']);
-    //$events->listen(ConfigureLocales::class, [$this, 'addLocales']);
+    $events->listen(ConfigureLocales::class, [$this, 'addLocales']);
   }
   /**
    * @param ConfigureClientView $event
