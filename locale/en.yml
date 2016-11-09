@@ -1,0 +1,12 @@
+empewoow-flarum-auth-redirect:
+
+  ##
+  # UNIQUE KEYS - The following keys are used in only one location each.
+  ##
+
+  # Strings in this namespace are used by the admin interface.
+  admin:
+   auth_settings:
+    title: Auth redirect settings
+    redirect_url: Redirect URL
+    url_instructions: ex: http://localhost/login
