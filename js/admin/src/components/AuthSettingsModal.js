@@ -12,7 +12,11 @@ export default class AuthSettingsModal extends SettingsModal {
 
   form() {
     return [
-      <p>This is a test :)</p>
+      <div className="Form-group">
+        <label>Redirect URL</label>
+        ex: http://localhost/login
+        <input className="FormControl" bidi={this.setting('empewoow-flarum-auth-redirect.auth_redirect_url')}/>
+      </div>
     ];
   }
 

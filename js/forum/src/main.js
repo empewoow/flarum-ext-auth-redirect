@@ -20,7 +20,8 @@ app.initializers.add('empewoow-flarum-auth-redirect', function() {
       items.remove('signUp');
 
       // Redirect to our login system!
-      //window.location = 'http://localhost/login';
+      console.log(app.forum.attribute('auth_redirect_url')); // Check if it works...
+      //window.location = app.forum.attribute('auth_redirect_url');
     }
   });
 
@@ -33,7 +34,7 @@ app.initializers.add('empewoow-flarum-auth-redirect', function() {
       LinkButton.component({
           icon: 'sign-out',
           children: app.translator.trans('core.forum.header.log_out_button'),
-          href:  'http://localhost/login',
+          href:  app.forum.attribute('auth_redirect_url'),
           config: () => {}
         }),
       -100

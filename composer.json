@@ -13,11 +13,16 @@
   "require": {
     "flarum/core": "^0.1.0-beta.5"
   },
+  "autoload": {
+    "psr-4": {
+      "Empewoow\\AuthRedirect\\": "src/"
+    }
+  },
   "extra": {
     "flarum-extension": {
       "title": "Auth Redirect",
       "icon": {
-        "name": "check",
+        "name": "arrow-right",
         "backgroundColor": "#006db6",
         "color": "#fff"
       }
