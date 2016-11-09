@@ -30,7 +30,7 @@ class AddAuthAttribute {
   public function prepareApiAttributes(PrepareApiAttributes $event) {
     if ($event->isSerializer(ForumSerializer::class)) {
       $event->attributes['auth_redirect_url'] = $this->settings->get('empewoow-flarum-auth-redirect.auth_redirect_url');
-      //$event->attributes['logo_css'] = $this->settings->get('santiagobiali-logo.logo_css');
+      $event->attributes['auth_disable_login'] = $this->settings->get('empewoow-flarum-auth-redirect.auth_disable_login');
     }
   }
 }

@@ -8,7 +8,7 @@ import SettingsPage from 'flarum/components/SettingsPage';
 
 // Initialize when app loads
 app.initializers.add('empewoow-flarum-auth-redirect', function() {
-  console.log("Hi there!");
+  console.log('Hi there!');
   extend(HeaderSecondary.prototype, 'items', function(items) {
     if (items.has('session')) {
       console.log('We have a session! Do nothing!');
@@ -16,7 +16,11 @@ app.initializers.add('empewoow-flarum-auth-redirect', function() {
       console.log('Does not have a session! Redirect now!');
 
       // Remove some buttons
-      //items.remove('logIn');
+      console.log(app.forum.attribute('auth_disable_login'));
+      if (app.forum.attribute('auth_disable_login') == '1') {
+        console.log('Remove log-in button!');
+        items.remove('logIn');
+      }
       items.remove('signUp');
 
       // Redirect to our login system!

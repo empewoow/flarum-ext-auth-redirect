@@ -10,6 +10,10 @@
       "email": "empewoow@gmail.com"
     }
   ],
+  "support": {
+    "issues": "https://github.com/empewoow/flarum-ext-auth-redirect/issues",
+    "source": "https://github.com/empewoow/flarum-ext-auth-redirect"
+  },
   "require": {
     "flarum/core": "^0.1.0-beta.5"
   },

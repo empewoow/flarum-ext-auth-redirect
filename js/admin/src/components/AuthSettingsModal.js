@@ -15,6 +15,7 @@ export default class AuthSettingsModal extends SettingsModal {
         <label>{app.translator.trans('empewoow-flarum-auth-redirect.admin.auth_settings.redirect_url')}</label>
         {app.translator.trans('empewoow-flarum-auth-redirect.admin.auth_settings.url_instructions')}
         <input className="FormControl" bidi={this.setting('empewoow-flarum-auth-redirect.auth_redirect_url')}/>
+        <label className="checkbox"><input type="checkbox" bidi={this.setting('empewoow-flarum-auth-redirect.auth_disable_login')}/>{app.translator.trans('empewoow-flarum-auth-redirect.admin.auth_settings.disable_login')}</label>
       </div>
     ];
   }
