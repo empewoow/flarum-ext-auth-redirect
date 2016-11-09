@@ -9,5 +9,9 @@ return function (Dispatcher $events) {
       $event->addAssets(__DIR__.'/js/forum/dist/extension.js');
       $event->addBootstrapper('empewoow/flarum-auth-redirect/main');
     }
+    if ($event->isAdmin()) {
+      $event->addAssets(__DIR__.'/js/admin/dist/extension.js');
+      $event->addBootstrapper('empewoow/flarum-auth-redirect/main');
+    }
   });
 };

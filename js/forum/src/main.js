@@ -21,7 +21,7 @@ app.initializers.add('empewoow-flarum-auth-redirect', function() {
       items.remove('signUp');
 
       // Redirect to our login system!
-      //window.location = app.forum.attribute('baseUrl') + '/login';
+      //window.location = 'http://localhost/login';
     }
   });
 
