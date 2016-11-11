@@ -15,22 +15,13 @@ export default class AuthSettingsModal extends SettingsModal {
         <label>{app.translator.trans('empewoow-flarum-auth-redirect.admin.auth_settings.redirect_url')}</label>
         {app.translator.trans('empewoow-flarum-auth-redirect.admin.auth_settings.url_instructions')}
         <input className="FormControl" bidi={this.setting('empewoow-flarum-auth-redirect.auth_redirect_url')}/>
+        <br/>
         <label className="checkbox"><input type="checkbox" bidi={this.setting('empewoow-flarum-auth-redirect.auth_disable_login')}/>{app.translator.trans('empewoow-flarum-auth-redirect.admin.auth_settings.disable_login')}</label>
+        <br/>
+        <label className="checkbox"><input type="checkbox" bidi={this.setting('empewoow-flarum-auth-redirect.auth_disable_signup')}/>{app.translator.trans('empewoow-flarum-auth-redirect.admin.auth_settings.disable_signup')}</label>
+        <br/>
+        <label className="checkbox"><input type="checkbox" bidi={this.setting('empewoow-flarum-auth-redirect.auth_disable_change_email')}/>{app.translator.trans('empewoow-flarum-auth-redirect.admin.auth_settings.disable_change_email')}</label>
       </div>
     ];
   }
-
-  // form() {
-  //   return [
-  //     <div className="Form-group">
-  //       <label>{app.translator.trans('santiagobiali-logo.admin.logo_settings.logo_url')}</label>
-  //       {app.translator.trans('santiagobiali-logo.admin.logo_settings.path_instructions')}
-  //       <input className="FormControl" bidi={this.setting('santiagobiali-logo.logo_url')}/>
-  //       <br/>
-  //       <label>{app.translator.trans('santiagobiali-logo.admin.css_settings.title')}</label>
-  //       {app.translator.trans('santiagobiali-logo.admin.css_settings.css_instructions')}
-  //       <textarea className="FormControl" rows="3" bidi={this.setting('santiagobiali-logo.logo_css')}/>
-  //     </div>
-  //   ];
-  // }
 }

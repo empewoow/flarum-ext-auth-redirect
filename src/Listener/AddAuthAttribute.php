@@ -31,6 +31,8 @@ class AddAuthAttribute {
     if ($event->isSerializer(ForumSerializer::class)) {
       $event->attributes['auth_redirect_url'] = $this->settings->get('empewoow-flarum-auth-redirect.auth_redirect_url');
       $event->attributes['auth_disable_login'] = $this->settings->get('empewoow-flarum-auth-redirect.auth_disable_login');
+      $event->attributes['auth_disable_signup'] = $this->settings->get('empewoow-flarum-auth-redirect.auth_disable_signup');
+      $event->attributes['auth_disable_change_email'] = $this->settings->get('empewoow-flarum-auth-redirect.auth_disable_change_email');
     }
   }
 }

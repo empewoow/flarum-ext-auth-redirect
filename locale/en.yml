@@ -10,4 +10,6 @@ empewoow-flarum-auth-redirect:
     title: Auth redirect settings
     redirect_url: Redirect URL
     url_instructions: ex: http://localhost/login
-    disable_login: Disable login button
+    disable_login: Disable log-in button
+    disable_signup: Disable sign-up button
+    disable_change_email: Disable change email address button

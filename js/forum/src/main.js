@@ -3,82 +3,60 @@ import HeaderSecondary from 'flarum/components/HeaderSecondary';
 import SessionDropdown from 'flarum/components/SessionDropdown';
 import LinkButton from 'flarum/components/LinkButton';
 import SettingsPage from 'flarum/components/SettingsPage';
-//import LogInModal from 'flarum/components/LogInModal';
-//import ChangePasswordModal from 'flarum/components/ChangePasswordModal'
 
 // Initialize when app loads
 app.initializers.add('empewoow-flarum-auth-redirect', function() {
   console.log('Hi there!');
   extend(HeaderSecondary.prototype, 'items', function(items) {
     if (items.has('session')) {
-      console.log('We have a session! Do nothing!');
+      console.log('We have a session, do nothing!');
     } else {
-      console.log('Does not have a session! Redirect now!');
+      console.log('Does not have a session!');
 
       // Remove some buttons
-      console.log(app.forum.attribute('auth_disable_login'));
+      //console.log(app.forum.attribute('auth_disable_login') + ' ' + app.forum.attribute('auth_disable_signup'));
       if (app.forum.attribute('auth_disable_login') == '1') {
-        console.log('Remove log-in button!');
+        //console.log('Remove log-in button!');
         items.remove('logIn');
       }
-      items.remove('signUp');
+      if (app.forum.attribute('auth_disable_signup') == '1') {
+        //console.log('Remove sign-up button!');
+        items.remove('signUp');
+      }
 
-      // Redirect to our login system!
-      console.log(app.forum.attribute('auth_redirect_url')); // Check if it works...
-      //window.location = app.forum.attribute('auth_redirect_url');
+      //console.log(app.forum.attribute('auth_redirect_url')); // Check if it works...
+
+      // If our redirect URL is not empty
+      if (app.forum.attribute('auth_redirect_url') != '') {
+        // Redirect to our login system!
+        window.location = app.forum.attribute('auth_redirect_url');
+      }
     }
   });
 
   // Change log-out button URL
   extend(SessionDropdown.prototype, 'items', function(items){
-    // Remove existing button first
-    items.remove('logOut');
-    // Add our own button
-    items.add('logOut',
-      LinkButton.component({
-          icon: 'sign-out',
-          children: app.translator.trans('core.forum.header.log_out_button'),
-          href:  app.forum.attribute('auth_redirect_url'),
-          config: () => {}
-        }),
-      -100
-    );
+    // If our redirect URL is not empty
+    if (app.forum.attribute('auth_redirect_url') != '') {
+      // Remove existing button first
+      items.remove('logOut');
+      // Add our own button
+      items.add('logOut',
+        LinkButton.component({
+            icon: 'sign-out',
+            children: app.translator.trans('core.forum.header.log_out_button'),
+            href:  app.forum.attribute('auth_redirect_url'),
+            config: () => {}
+          }),
+        -100
+      );
+    }
   });
 
   // Remove change e-mail functionality
   extend(SettingsPage.prototype, 'accountItems', function(items) {
-    items.remove('changeEmail');
+    if (app.forum.attribute('auth_disable_change_email') == '1') {
+      items.remove('changeEmail');
+    }
   });
-
-  // LogInModal.prototype.content = function () {
-  //   return [
-  //     <div className="Modal-body">
-  //       <div className="Form Form--centered">
-  //         <a className="btn btn-primary" href="http://localhost/auth/login">Login with Cosmoquest</a>
-  //       </div>
-  //      </div>
-  //     <div className="Modal-footer">
-  //       <p className="LogInModal-forgotPassword">
-  //       <a className="btn" href="http://localhost/password/reset">Forgot Password?</a>
-  //       </p>
-  //       <p className="LogInModal-signUp">
-  //         <a className="btn" href="http://localhost/auth/register">Register with Cosmoquest</a>
-  //       </p>
-  //     </div>
-  //   ];
-  // }
-
-  // ChangePasswordModal.prototype.content = function() {
-  //   return (
-  //     <div className="Modal-body">
-  //       <div className="Form Form--centered">
-  //         <p className="helpText">Change your passsword :D!</p>
-  //         <div className="Form-group">
-  //           <a href="/password/reset" class='Button Button--primary Button--block'>Click here to change your password :D!</a>
-  //         </div>
-  //       </div>
-  //     </div>
-  //   );
-  // }
-
 });
