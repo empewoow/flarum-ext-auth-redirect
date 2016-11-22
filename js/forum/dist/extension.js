@@ -50,15 +50,15 @@ System.register('empewoow/flarum-auth-redirect/main', ['flarum/extend', 'flarum/
 
         // Change log-out button URL
         extend(SessionDropdown.prototype, 'items', function (items) {
-          // If our redirect URL is not empty
-          if (app.forum.attribute('auth_redirect_url') != '') {
+          // If our log-out URL is not empty
+          if (app.forum.attribute('auth_logout_url') != '') {
             // Remove existing button first
             items.remove('logOut');
             // Add our own button
             items.add('logOut', LinkButton.component({
               icon: 'sign-out',
               children: app.translator.trans('core.forum.header.log_out_button'),
-              href: app.forum.attribute('auth_redirect_url'),
+              href: app.forum.attribute('auth_logout_url'),
               config: function config() {}
             }), -100);
           }

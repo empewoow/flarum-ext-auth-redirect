@@ -9,7 +9,9 @@ empewoow-flarum-auth-redirect:
    auth_settings:
     title: Auth redirect instellingen
     redirect_url: Redirect URL
-    url_instructions: vb: http://localhost/login
+    redirect_url_instructions: Als dit veld leeg is zal er geen redirect plaatsvinden. (Voorbeeld: http://localhost/login)
+    logout_url: Uitloggen URL
+    logout_url_instructions: Als dit veld leeg is zal de uitloggen URL niet veranderen. (Voorbeeld: http://localhost/logout)
     disable_login: Zet log-in knop uit
     disable_signup: Zet registreren knop uit
     disable_change_email: Zet verander e-mailadres knop uit

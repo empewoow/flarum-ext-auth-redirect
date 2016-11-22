@@ -38,8 +38,16 @@ System.register('empewoow/flarum-auth-redirect/components/AuthSettingsModal', ['
                 null,
                 app.translator.trans('empewoow-flarum-auth-redirect.admin.auth_settings.redirect_url')
               ),
-              app.translator.trans('empewoow-flarum-auth-redirect.admin.auth_settings.url_instructions'),
+              app.translator.trans('empewoow-flarum-auth-redirect.admin.auth_settings.redirect_url_instructions'),
               m('input', { className: 'FormControl', bidi: this.setting('empewoow-flarum-auth-redirect.auth_redirect_url') }),
+              m('br', null),
+              m(
+                'label',
+                null,
+                app.translator.trans('empewoow-flarum-auth-redirect.admin.auth_settings.logout_url')
+              ),
+              app.translator.trans('empewoow-flarum-auth-redirect.admin.auth_settings.logout_url_instructions'),
+              m('input', { className: 'FormControl', bidi: this.setting('empewoow-flarum-auth-redirect.auth_logout_url') }),
               m('br', null),
               m(
                 'label',
@@ -101,15 +109,15 @@ System.register('empewoow/flarum-auth-redirect/main', ['flarum/app', 'flarum/ext
 
         // Change log-out button URL
         extend(SessionDropdown.prototype, 'items', function (items) {
-          // If our redirect URL is not empty
-          if (app.forum.attribute('auth_redirect_url') != '') {
+          // If our log-out URL is not empty
+          if (app.forum.attribute('auth_logout_url') != '') {
             // Remove existing button first
             items.remove('logOut');
             // Add our own button
             items.add('logOut', LinkButton.component({
               icon: 'sign-out',
               children: app.translator.trans('core.admin.header.log_out_button'),
-              href: app.forum.attribute('auth_redirect_url'),
+              href: app.forum.attribute('auth_logout_url'),
               config: function config() {}
             }), -100);
           }
