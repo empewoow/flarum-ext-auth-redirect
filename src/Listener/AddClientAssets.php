@@ -21,8 +21,8 @@ class AddClientAssets {
   public function addAssets(ConfigureClientView $event) {
     if ($event->isForum()) {
       $event->addAssets(__DIR__.'/../../js/forum/dist/extension.js');
-			$event->addBootstrapper('empewoow/flarum-auth-redirect/main');
-	  }
+      $event->addBootstrapper('empewoow/flarum-auth-redirect/main');
+    }
     if ($event->isAdmin()) {
       $event->addAssets(__DIR__.'/../../js/admin/dist/extension.js');
       $event->addBootstrapper('empewoow/flarum-auth-redirect/main');
@@ -38,6 +38,6 @@ class AddClientAssets {
       if ($file->isFile() && in_array($file->getExtension(), ['yml', 'yaml'])) {
         $event->locales->addTranslations($file->getBasename('.'.$file->getExtension()), $file->getPathname());
       }
-  	}
+    }
   }
 }

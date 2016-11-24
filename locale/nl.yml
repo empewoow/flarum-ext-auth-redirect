@@ -6,8 +6,8 @@ empewoow-flarum-auth-redirect:
 
   # Strings in this namespace are used by the admin interface.
   admin:
-   auth_settings:
-    title: Auth redirect instellingen
+    auth_settings:
+      title: Auth redirect instellingen
     redirect_url: Redirect URL
     redirect_url_instructions: Als dit veld leeg is zal er geen redirect plaatsvinden. (Voorbeeld: http://localhost/login)
     logout_url: Uitloggen redirect URL
