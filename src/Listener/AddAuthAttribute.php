@@ -24,7 +24,7 @@ class AddAuthAttribute {
    * @param Dispatcher $events
    */
   public function subscribe(Dispatcher $events) {
-  	$events->listen(PrepareApiAttributes::class, [$this, 'prepareApiAttributes']);
+    $events->listen(PrepareApiAttributes::class, [$this, 'prepareApiAttributes']);
   }
 
   public function prepareApiAttributes(PrepareApiAttributes $event) {
