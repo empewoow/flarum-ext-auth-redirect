@@ -81,48 +81,54 @@ System.register('empewoow/flarum-auth-redirect/components/AuthSettingsModal', ['
 });;
 'use strict';
 
-System.register('empewoow/flarum-auth-redirect/main', ['flarum/app', 'flarum/extend', 'empewoow/flarum-auth-redirect/components/AuthSettingsModal', 'flarum/components/SessionDropdown', 'flarum/components/LinkButton'], function (_export, _context) {
-  "use strict";
+System.register('empewoow/flarum-auth-redirect/main', ['flarum/extend', 'empewoow/flarum-auth-redirect/components/AuthSettingsModal', 'flarum/components/SessionDropdown', 'flarum/components/Button'], function (_export, _context) {
+	"use strict";
 
-  var app, extend, AuthSettingsModal, SessionDropdown, LinkButton;
-  return {
-    setters: [function (_flarumApp) {
-      app = _flarumApp.default;
-    }, function (_flarumExtend) {
-      extend = _flarumExtend.extend;
-    }, function (_empewoowFlarumAuthRedirectComponentsAuthSettingsModal) {
-      AuthSettingsModal = _empewoowFlarumAuthRedirectComponentsAuthSettingsModal.default;
-    }, function (_flarumComponentsSessionDropdown) {
-      SessionDropdown = _flarumComponentsSessionDropdown.default;
-    }, function (_flarumComponentsLinkButton) {
-      LinkButton = _flarumComponentsLinkButton.default;
-    }],
-    execute: function () {
+	var extend, AuthSettingsModal, SessionDropdown, Button;
+	return {
+		setters: [function (_flarumExtend) {
+			extend = _flarumExtend.extend;
+		}, function (_empewoowFlarumAuthRedirectComponentsAuthSettingsModal) {
+			AuthSettingsModal = _empewoowFlarumAuthRedirectComponentsAuthSettingsModal.default;
+		}, function (_flarumComponentsSessionDropdown) {
+			SessionDropdown = _flarumComponentsSessionDropdown.default;
+		}, function (_flarumComponentsButton) {
+			Button = _flarumComponentsButton.default;
+		}],
+		execute: function () {
 
-      app.initializers.add('empewoow-flarum-auth-redirect', function () {
-        console.log('Hello admin :)!');
+			// Initialize when app loads
+			app.initializers.add('empewoow-flarum-auth-redirect', function () {
 
-        // I have no idea why this should be called "empewoow-auth-redirect"...
-        app.extensionSettings['empewoow-auth-redirect'] = function () {
-          return app.modal.show(new AuthSettingsModal());
-        };
+				// I have no idea why this should be called "empewoow-auth-redirect"...
+				app.extensionSettings['empewoow-auth-redirect'] = function () {
+					return app.modal.show(new AuthSettingsModal());
+				};
 
-        // Change log-out button URL
-        extend(SessionDropdown.prototype, 'items', function (items) {
-          // If our log-out URL is not empty
-          if (app.forum.attribute('auth_logout_url') != '') {
-            // Remove existing button first
-            items.remove('logOut');
-            // Add our own button
-            items.add('logOut', LinkButton.component({
-              icon: 'sign-out',
-              children: app.translator.trans('core.admin.header.log_out_button'),
-              href: app.forum.attribute('auth_logout_url'),
-              config: function config() {}
-            }), -100);
-          }
-        });
-      });
-    }
-  };
+				// Change logout button URL
+				extend(SessionDropdown.prototype, 'items', function (items) {
+
+					// If our logout URL is not empty
+					if (app.forum.attribute('auth_logout_url') != '') {
+
+						// Our logout and redirect function
+						app.logoutWithRedirect = function (url) {
+							//console.log(app.forum.attribute("baseUrl") + "/logout?token=" + this.csrfToken + "&return=" + url);
+							window.location = app.forum.attribute("baseUrl") + "/logout?token=" + this.csrfToken + "&return=" + url;
+						};
+
+						// Remove existing button first
+						items.remove('logOut');
+
+						// Add our own button
+						items.add('logOut', Button.component({
+							icon: 'sign-out',
+							children: app.translator.trans('core.admin.header.log_out_button'),
+							onclick: app.logoutWithRedirect.bind(app.session, app.forum.attribute('auth_logout_url'))
+						}), -100);
+					}
+				});
+			});
+		}
+	};
 });

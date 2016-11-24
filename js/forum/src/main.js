@@ -1,30 +1,29 @@
 import { extend } from 'flarum/extend';
+
 import HeaderSecondary from 'flarum/components/HeaderSecondary';
 import SessionDropdown from 'flarum/components/SessionDropdown';
-import LinkButton from 'flarum/components/LinkButton';
+import Button from 'flarum/components/Button';
 import SettingsPage from 'flarum/components/SettingsPage';
 
 // Initialize when app loads
-app.initializers.add('empewoow-flarum-auth-redirect', function() {
-  console.log('Hi there!');
+app.initializers.add('empewoow-flarum-auth-redirect', () => {
+
   extend(HeaderSecondary.prototype, 'items', function(items) {
     if (items.has('session')) {
-      console.log('We have a session, do nothing!');
+      //console.log('We have a session, do nothing!');
     } else {
-      console.log('Does not have a session!');
+      //console.log('Does not have a session!');
 
       // Remove some buttons
       //console.log(app.forum.attribute('auth_disable_login') + ' ' + app.forum.attribute('auth_disable_signup'));
       if (app.forum.attribute('auth_disable_login') == '1') {
-        //console.log('Remove log-in button!');
+        //console.log('Remove login button!');
         items.remove('logIn');
       }
       if (app.forum.attribute('auth_disable_signup') == '1') {
-        //console.log('Remove sign-up button!');
+        //console.log('Remove signup button!');
         items.remove('signUp');
       }
-
-      //console.log(app.forum.attribute('auth_redirect_url')); // Check if it works...
 
       // If our redirect URL is not empty
       if (app.forum.attribute('auth_redirect_url') != '') {
@@ -34,23 +33,33 @@ app.initializers.add('empewoow-flarum-auth-redirect', function() {
     }
   });
 
-  // Change log-out button URL
+  // Change logout button URL
   extend(SessionDropdown.prototype, 'items', function(items){
-		// If our log-out URL is not empty
-		if (app.forum.attribute('auth_logout_url') != '') {
+
+    // If our logout URL is not empty
+    if (app.forum.attribute('auth_logout_url') != '') {
+
+      // Our logout and redirect function
+      app.logoutWithRedirect = function(url) {
+        //console.log(app.forum.attribute("baseUrl") + "/logout?token=" + this.csrfToken + "&return=" + url);
+        window.location = app.forum.attribute("baseUrl") + "/logout?token=" + this.csrfToken + "&return=" + url;
+      }
+
       // Remove existing button first
       items.remove('logOut');
+
       // Add our own button
       items.add('logOut',
-        LinkButton.component({
-            icon: 'sign-out',
-            children: app.translator.trans('core.forum.header.log_out_button'),
-            href:  app.forum.attribute('auth_logout_url'),
-            config: () => {}
-          }),
+        Button.component({
+          icon: 'sign-out',
+          children: app.translator.trans('core.forum.header.log_out_button'),
+          onclick: app.logoutWithRedirect.bind(app.session, app.forum.attribute('auth_logout_url'))
+        }),
         -100
       );
-		}
+
+    }
+
   });
 
   // Remove change e-mail functionality
@@ -59,4 +68,5 @@ app.initializers.add('empewoow-flarum-auth-redirect', function() {
       items.remove('changeEmail');
     }
   });
+
 });
