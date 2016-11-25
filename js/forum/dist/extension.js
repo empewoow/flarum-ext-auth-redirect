@@ -1,35 +1,3 @@
-"use strict";
-
-System.register("empewoow/flarum-auth-redirect/components/LogoutSession", ["flarum/Session"], function (_export, _context) {
-  "use strict";
-
-  var Session, LogoutSession;
-  return {
-    setters: [function (_flarumSession) {
-      Session = _flarumSession.default;
-    }],
-    execute: function () {
-      LogoutSession = function (_Session) {
-        babelHelpers.inherits(LogoutSession, _Session);
-
-        function LogoutSession() {
-          babelHelpers.classCallCheck(this, LogoutSession);
-          return babelHelpers.possibleConstructorReturn(this, (LogoutSession.__proto__ || Object.getPrototypeOf(LogoutSession)).apply(this, arguments));
-        }
-
-        babelHelpers.createClass(LogoutSession, [{
-          key: "logoutWithRedirect",
-          value: function logoutWithRedirect(url) {
-            window.location = app.forum.attribute("baseUrl") + "/logout?token=" + this.csrfToken + "&return=" + url;
-          }
-        }]);
-        return LogoutSession;
-      }(Session);
-
-      _export("default", LogoutSession);
-    }
-  };
-});;
 'use strict';
 
 System.register('empewoow/flarum-auth-redirect/main', ['flarum/extend', 'flarum/components/HeaderSecondary', 'flarum/components/SessionDropdown', 'flarum/components/Button', 'flarum/components/SettingsPage'], function (_export, _context) {
