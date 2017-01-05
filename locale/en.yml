@@ -8,10 +8,10 @@ empewoow-flarum-auth-redirect:
   admin:
     auth_settings:
       title: Auth redirect settings
-    redirect_url: Redirect URL
-    redirect_url_instructions: If this field is empty it won't redirect. (Example: http://localhost/login)
-    logout_url: Logout redirect URL
-    logout_url_instructions: If this field is empty the logout redirect URL will not change. (Example: http://localhost/logout)
-    disable_login: Disable login button
-    disable_signup: Disable signup button
-    disable_change_email: Disable change email address button
+      redirect_url: Redirect URL
+      redirect_url_instructions: If this field is empty it won't redirect. (Example: http://localhost/login)
+      logout_url: Logout redirect URL
+      logout_url_instructions: If this field is empty the logout redirect URL will not change. (Example: http://localhost/logout)
+      disable_login: Disable login button
+      disable_signup: Disable signup button
+      disable_change_email: Disable change email address button
